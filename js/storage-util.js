@@ -46,7 +46,8 @@
   }
 
   /** @type {chrome.storage.StorageArea|StorageExtras} */
-  window.chromeLocal = Object.assign(browser.storage.local, StorageExtras);
+  // window.chromeLocal = Object.assign(browser.storage.local, StorageExtras);
+  window.chromeLocal = Object.assign(browser.storage.sync, StorageExtras, StorageExtrasSync);
   /** @type {chrome.storage.StorageArea|StorageExtras|StorageExtrasSync} */
   window.chromeSync = Object.assign(browser.storage.sync, StorageExtras, StorageExtrasSync);
 })();

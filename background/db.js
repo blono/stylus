@@ -16,7 +16,7 @@ const db = (() => {
   const FALLBACK = 'dbInChromeStorage';
   const dbApi = {
     async exec(...args) {
-      dbApi.exec = await tryUsingIndexedDB().catch(useChromeStorage);
+      dbApi.exec = await useChromeStorage();
       return dbApi.exec(...args);
     },
   };
