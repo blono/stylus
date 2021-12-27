@@ -1,3 +1,7 @@
+# Changes from the original stylus
+
+1. IndexedDB -> chrome.storage.sync
+
 # Stylus
 
 Stylus is a fork of Stylish for Chrome, also compatible with Firefox as a WebExtension
