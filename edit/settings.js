@@ -37,18 +37,22 @@ function StyleSettings(editor) {
   function createArea([parentSel, type]) {
     const sel = parentSel + ' textarea';
     const el = $(sel);
-    el.on('input', () => {
-      const val = el.value;
-      el.rows = val.match(/^/gm).length + !val.endsWith('\n');
-    });
+    setTimeout(() => {
+      $(sel).on('input', () => {
+        const val = $(sel).value;
+        $(sel).rows = val.match(/^/gm).length + !val.endsWith('\n');
+      });
+    }, 500);
     return createInput(sel,
       () => {
         const list = style[type] || [];
         const text = list.join('\n');
-        el.rows = (list.length || 1) + 1;
+        if ($(sel) != null) {
+          $(sel).rows = (list.length || 1) + 1;
+        }
         return text;
       },
-      () => API.styles.config(style.id, type, textToList(el.value))
+      () => API.styles.config(style.id, type, textToList($(sel).value))
     );
   }
 
@@ -74,10 +78,14 @@ function StyleSettings(editor) {
 
   function createInput(selector, getter, setter) {
     const el = $(selector);
-    el.addEventListener('change', setter);
+    setTimeout(() => {
+      $(selector).addEventListener('change', setter);
+    }, 500);
     return {
       update() {
-        el.value = getter();
+        setTimeout(() => {
+          $(selector).value = getter();
+        }, 500);
       },
     };
   }
